@@ -15,8 +15,6 @@ __fastcall Tgprincipal::Tgprincipal(TComponent* Owner)
 }
 //---------------------------------------------------------------------------
 
-
-
 void __fastcall Tgprincipal::Button9Click(TObject *Sender)
 {
 Close();
