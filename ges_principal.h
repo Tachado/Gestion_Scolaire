@@ -15,6 +15,21 @@
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Grids.hpp>
 #include <Vcl.Imaging.jpeg.hpp>
+#include <Data.DB.hpp>
+#include <FireDAC.Comp.Client.hpp>
+#include <FireDAC.Comp.UI.hpp>
+#include <FireDAC.Phys.hpp>
+#include <FireDAC.Phys.Intf.hpp>
+#include <FireDAC.Phys.ODBC.hpp>
+#include <FireDAC.Phys.ODBCDef.hpp>
+#include <FireDAC.Stan.Async.hpp>
+#include <FireDAC.Stan.Def.hpp>
+#include <FireDAC.Stan.Error.hpp>
+#include <FireDAC.Stan.Intf.hpp>
+#include <FireDAC.Stan.Option.hpp>
+#include <FireDAC.Stan.Pool.hpp>
+#include <FireDAC.UI.Intf.hpp>
+#include <FireDAC.VCLUI.Wait.hpp>
 //---------------------------------------------------------------------------
 class Tgprincipal : public TForm
 {
@@ -404,6 +419,8 @@ __published:	// Composants gérés par l'EDI
 	TLabel *Label96;
 	TLabel *Label98;
 	TLabel *Label99;
+	TFDConnection *FDConnection1;
+	TFDGUIxWaitCursor *FDGUIxWaitCursor1;
 private:	// Déclarations utilisateur
 public:		// Déclarations utilisateur
 	__fastcall Tgprincipal(TComponent* Owner);
