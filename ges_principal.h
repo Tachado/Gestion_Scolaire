@@ -421,6 +421,7 @@ __published:	// Composants gérés par l'EDI
 	TLabel *Label99;
 	TFDConnection *FDConnection1;
 	TFDGUIxWaitCursor *FDGUIxWaitCursor1;
+	void __fastcall Button9Click(TObject *Sender);
 private:	// Déclarations utilisateur
 public:		// Déclarations utilisateur
 	__fastcall Tgprincipal(TComponent* Owner);
