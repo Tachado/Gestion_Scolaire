@@ -320,14 +320,10 @@ __published:	// Composants gérés par l'EDI
 	TImage *Image7;
 	TGroupBox *GroupBox50;
 	TLabel *Label76;
-	TLabel *Label77;
 	TLabel *Label78;
-	TLabel *Label80;
 	TLabel *Label82;
 	TEdit *Edit25;
 	TComboBox *ComboBox12;
-	TDateTimePicker *DateTimePicker3;
-	TEdit *Edit26;
 	TEdit *Edit27;
 	TGroupBox *GroupBox51;
 	TButton *Button33;
