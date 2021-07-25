@@ -2065,6 +2065,15 @@ object glogin: Tglogin
       TextHint = 'Nom utilisateur'
       OnChange = userChange
     end
+    object DateTimePicker1: TDateTimePicker
+      Left = 13
+      Top = 128
+      Width = 113
+      Height = 21
+      Date = 44402.447153969910000000
+      Time = 44402.447153969910000000
+      TabOrder = 3
+    end
   end
   object Panel2: TPanel
     Left = -8

@@ -10,6 +10,7 @@
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Imaging.pngimage.hpp>
 #include <Vcl.Buttons.hpp>
+#include <Vcl.ComCtrls.hpp>
 //---------------------------------------------------------------------------
 class Tglogin : public TForm
 {
@@ -30,6 +31,7 @@ __published:	// Composants gérés par l'EDI
 	TEdit *structure;
 	TEdit *clef;
 	TButton *Button2;
+	TDateTimePicker *DateTimePicker1;
 	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall SpeedButton1Click(TObject *Sender);
 	void __fastcall SpeedButton1MouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift,
