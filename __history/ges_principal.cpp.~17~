@@ -1,0 +1,71 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+
+#include "ges_principal.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+Tgprincipal *gprincipal;
+//---------------------------------------------------------------------------
+__fastcall Tgprincipal::Tgprincipal(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::Button9Click(TObject *Sender)
+{
+Close();
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall Tgprincipal::Button17Click(TObject *Sender)
+{
+// enregistrement des classe
+
+	Query3->SQL->Text="INSERT INTO classes(enseignement,init_class,chef_class,nom_class,delai,ens_principal,serie_filiere,scolarite) VALUES('"+esgt->Text+"','"+init_class->Text+"','"+cfc->Text+"','"+clas->Text+"','"+dl_pay->Date.FormatString("yyyy-mm-dd")+"','"+prp->Text+"','"+s_f->Text+"','"+sct->Text+"' ) ";
+	Query3->ExecSQL();
+
+
+	esgt->Text="";
+	init_class->Text="";
+	cfc->Text="";
+	clas->Text="";
+	dl_pay->Text="";
+	prp->Text="";
+	s_f->Text="";
+	sct->Text="";
+
+	TabSheet4->OnShow(this);  // pour actualiser la page
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::DBGrid3CellClick(TColumn *Column)
+{
+if (DBGrid1->SelectedRows->Count>0) {
+	AnsiString idpl1="";
+	 TDataSet * ligne = DBGrid1 ->DataSource->DataSet;
+	 idpl1= ligne ->Fields->Fields[0] -> AsString;
+	 k->Text= idpl1  ;
+
+}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::Button18Click(TObject *Sender)
+{
+Close();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::TabSheet4Show(TObject *Sender)
+{
+Query3->SQL->Text="SELECT * FROM classes Order By id_class ";
+	Query3->Open();
+	Query3->Active=true;
+}
+//---------------------------------------------------------------------------
+

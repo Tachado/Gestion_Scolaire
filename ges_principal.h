@@ -30,6 +30,11 @@
 #include <FireDAC.Stan.Pool.hpp>
 #include <FireDAC.UI.Intf.hpp>
 #include <FireDAC.VCLUI.Wait.hpp>
+#include <FireDAC.Comp.DataSet.hpp>
+#include <FireDAC.DApt.hpp>
+#include <FireDAC.DApt.Intf.hpp>
+#include <FireDAC.DatS.hpp>
+#include <FireDAC.Stan.Param.hpp>
 //---------------------------------------------------------------------------
 class Tgprincipal : public TForm
 {
@@ -247,7 +252,7 @@ __published:	// Composants gérés par l'EDI
 	TLabel *Label58;
 	TLabel *Label60;
 	TLabel *Label61;
-	TEdit *Edit18;
+	TEdit *sct;
 	TGroupBox *GroupBox41;
 	TButton *Button17;
 	TButton *Button18;
@@ -257,12 +262,11 @@ __published:	// Composants gérés par l'EDI
 	TButton *Button22;
 	TButton *Button23;
 	TGroupBox *GroupBox39;
-	TImage *Image3;
 	TGroupBox *GroupBox42;
 	TImage *Image4;
-	TDateTimePicker *DateTimePicker2;
-	TComboBox *ComboBox4;
-	TComboBox *ComboBox5;
+	TDateTimePicker *dl_pay;
+	TComboBox *prp;
+	TComboBox *cfc;
 	TGroupBox *GroupBox43;
 	TLabel *Label47;
 	TLabel *Label51;
@@ -289,13 +293,13 @@ __published:	// Composants gérés par l'EDI
 	TGroupBox *GroupBox47;
 	TImage *Image6;
 	TLabel *Label64;
-	TEdit *Edit21;
+	TEdit *init_class;
 	TLabel *Label65;
 	TLabel *Label66;
-	TEdit *Edit22;
+	TEdit *s_f;
 	TLabel *Label68;
-	TComboBox *ComboBox8;
-	TComboBox *ComboBox9;
+	TComboBox *esgt;
+	TComboBox *clas;
 	TLabel *Label67;
 	TComboBox *ComboBox10;
 	TLabel *Label69;
@@ -417,7 +421,26 @@ __published:	// Composants gérés par l'EDI
 	TLabel *Label99;
 	TFDConnection *FDConnection1;
 	TFDGUIxWaitCursor *FDGUIxWaitCursor1;
+	TDataSource *DataSource1;
+	TFDQuery *Query1;
+	TFDQuery *Query2;
+	TEdit *k;
+	TDataSource *DataSource2;
+	TFDQuery *Query3;
+	TPopupMenu *PopupMenu1;
+	TMenuItem *Modifier1;
+	TMenuItem *Supprimer1;
+	TImage *Image3;
 	void __fastcall Button9Click(TObject *Sender);
+	void __fastcall Button17Click(TObject *Sender);
+	void __fastcall DBGrid3CellClick(TColumn *Column);
+	void __fastcall Button18Click(TObject *Sender);
+	void __fastcall TabSheet4Show(TObject *Sender);
+	void __fastcall Button20Click(TObject *Sender);
+	void __fastcall Button19Click(TObject *Sender);
+	void __fastcall Supprimer1Click(TObject *Sender);
+	void __fastcall Modifier1Click(TObject *Sender);
+	void __fastcall Button21Click(TObject *Sender);
 private:	// Déclarations utilisateur
 public:		// Déclarations utilisateur
 	__fastcall Tgprincipal(TComponent* Owner);
