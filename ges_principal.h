@@ -441,6 +441,7 @@ __published:	// Composants gérés par l'EDI
 	void __fastcall Supprimer1Click(TObject *Sender);
 	void __fastcall Modifier1Click(TObject *Sender);
 	void __fastcall Button21Click(TObject *Sender);
+	void __fastcall Button25Click(TObject *Sender);
 private:	// Déclarations utilisateur
 public:		// Déclarations utilisateur
 	__fastcall Tgprincipal(TComponent* Owner);

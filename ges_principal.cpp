@@ -166,3 +166,18 @@ void __fastcall Tgprincipal::Button21Click(TObject *Sender)
 //---------------------------------------------------------------------------
 
 
+void __fastcall Tgprincipal::Button25Click(TObject *Sender)
+{
+Query3->SQL->Text=" INSERT INTO personnels (ntp, sexe, email, grad,tel) VALUES ('"+ntp->Text+"','"+s->Text+"','"+e->Text+"','"+g->Text+"','"+c->Text+"')";
+Query3->ExecSQL() ;
+
+ ntp->Text="";
+ s->Text="";
+ e->Text="";
+ g->Text="";
+ c->Text="";
+
+ L5->OnShow(this) ;
+}
+//---------------------------------------------------------------------------
+
