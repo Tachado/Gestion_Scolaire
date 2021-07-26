@@ -70,6 +70,8 @@ Close();
 
 void __fastcall Tgprincipal::TabSheet4Show(TObject *Sender)
 {
+//actualisation
+
 Query3->SQL->Text="SELECT * FROM classes Order By id_class ";
 	Query3->Open();
 	Query3->Active=true;
@@ -78,6 +80,8 @@ Query3->SQL->Text="SELECT * FROM classes Order By id_class ";
 
 void __fastcall Tgprincipal::Button20Click(TObject *Sender)
 {
+// modifier dans class
+
 Query1->SQL->Text="UPDATE classes SET enseignement='"+ esgt->Text+"',init_class='"+
 init_class->Text+"',chef_class='"+cfc->Text+"',nom_class='"+clas->Text+"',ens_principal='"+
 prp->Text+"',serie_filiere='"+s_f->Text+"',scolarite='"+sct->Text+"' WHERE id_class='"+k->Text+"'   ";
@@ -108,6 +112,7 @@ Query1->ExecSQL();
 
 void __fastcall Tgprincipal::Supprimer1Click(TObject *Sender)
 {
+		// supprimer dans class
    if (MessageDlgPos("êtes-vous sure de vouloir supprimer ?", mtConfirmation, mbYesNoCancel, 0, 500, 300, mbYes)== IDYES)
  {
   Query2->SQL->Text=" DELETE FROM classes WHERE id_class='"+k->Text+"' ";
@@ -119,6 +124,8 @@ Query1->ExecSQL();
 
 void __fastcall Tgprincipal::Modifier1Click(TObject *Sender)
 {
+// pour charger dans classe et modifier
+
 	AnsiString id1,esgt1,init_class1,cfc1,clas1,prp1,s_f1,sct1;
 	TDate dl_pay1;
    if (DBGrid3->SelectedRows->Count>0) {
@@ -153,6 +160,7 @@ void __fastcall Tgprincipal::Modifier1Click(TObject *Sender)
 
 void __fastcall Tgprincipal::Button21Click(TObject *Sender)
 {
+// anuler une action dans class
 	esgt->Text="";
 	init_class->Text="";
 	cfc->Text="";
@@ -168,16 +176,23 @@ void __fastcall Tgprincipal::Button21Click(TObject *Sender)
 
 void __fastcall Tgprincipal::Button25Click(TObject *Sender)
 {
-Query3->SQL->Text=" INSERT INTO personnels (ntp, sexe, email, grad,tel) VALUES ('"+ntp->Text+"','"+s->Text+"','"+e->Text+"','"+g->Text+"','"+c->Text+"')";
+// enregistrer une matiere
+	if ( (typ_ens->Text != "") & (typ_m->Text != "") &(coef->Text != "") & (ntn->Text !="") &(init_m->Text !="") ) {
+
+Query3->SQL->Text=" INSERT INTO matieres (type_ens, type_m, coef, nom_m,init_mat) VALUES ('"+typ_ens->Text+"','"+typ_m->Text+"','"+coef->Text+"','"+ntm->Text+"','"+init_m->Text+"')";
 Query3->ExecSQL() ;
 
- ntp->Text="";
- s->Text="";
- e->Text="";
- g->Text="";
- c->Text="";
+ typ_ens ->Text="";
+ typ_m->Text="";
+ coef->Text="";
+ ntn->Text="";
+ init_m->Text="";
 
- L5->OnShow(this) ;
+ TabSheet7->OnShow(this) ;
+	}
+	else{
+	ShowMessage("Veillez renseigner toutes les informations avant d'enregistrer");
+}
 }
 //---------------------------------------------------------------------------
 
