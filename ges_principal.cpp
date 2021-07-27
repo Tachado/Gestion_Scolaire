@@ -126,11 +126,11 @@ void __fastcall Tgprincipal::Modifier1Click(TObject *Sender)
 {
 // pour charger dans classe et modifier
 
-	AnsiString id1,esgt1,init_class1,cfc1,clas1,prp1,s_f1,sct1;
+	AnsiString idc1,esgt1,init_class1,cfc1,clas1,prp1,s_f1,sct1;
 	TDate dl_pay1;
    if (DBGrid3->SelectedRows->Count>0) {
 	 TDataSet * ligne = DBGrid3 ->DataSource->DataSet;
-	 id1= ligne ->Fields->FieldByName("id_class")->AsAnsiString;
+	 idc1= ligne ->Fields->FieldByName("id_class")->AsAnsiString;
 	 esgt1= ligne ->Fields->FieldByName("enseignement")->AsAnsiString;
 	 init_class1 = ligne ->Fields->FieldByName("init_class")->AsAnsiString;
 	 cfc1= ligne ->Fields->FieldByName("chef_class")->AsAnsiString;
@@ -152,7 +152,7 @@ void __fastcall Tgprincipal::Modifier1Click(TObject *Sender)
 	sct->Text=sct1;
 	dl_pay->Date= dl_pay1;
    }
-	Query1->SQL->Text="SELECT * FROM classes WHERE id_class='"+id1+"'  ";
+	Query1->SQL->Text="SELECT * FROM classes WHERE id_class='"+idc1+"'  ";
    Query1->Open();
    Query1->Active=true;
 }
@@ -177,15 +177,15 @@ void __fastcall Tgprincipal::Button21Click(TObject *Sender)
 void __fastcall Tgprincipal::Button25Click(TObject *Sender)
 {
 // enregistrer une matiere
-	if ( (typ_ens->Text != "") & (typ_m->Text != "") &(coef->Text != "") & (ntn->Text !="") &(init_m->Text !="") ) {
+	if ( (typ_ens->Text != "") & (typ_m->Text != "") &(coef->Text != "") & (ntm->Text !="") &(init_m->Text !="") ) {
 
-Query3->SQL->Text=" INSERT INTO matieres (type_ens, type_m, coef, nom_m,init_mat) VALUES ('"+typ_ens->Text+"','"+typ_m->Text+"','"+coef->Text+"','"+ntm->Text+"','"+init_m->Text+"')";
+Query3->SQL->Text=" INSERT INTO matieres (id_m,type_ens, type_m, coef, nom_m,init_mat) VALUES ('"+id_m->Text+"','"+typ_ens->Text+"','"+typ_m->Text+"','"+coef->Text+"','"+ntm->Text+"','"+init_m->Text+"')";
 Query3->ExecSQL() ;
 
  typ_ens ->Text="";
  typ_m->Text="";
  coef->Text="";
- ntn->Text="";
+ ntm->Text="";
  init_m->Text="";
 
  TabSheet7->OnShow(this) ;
@@ -193,6 +193,119 @@ Query3->ExecSQL() ;
 	else{
 	ShowMessage("Veillez renseigner toutes les informations avant d'enregistrer");
 }
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall Tgprincipal::TabSheet7Show(TObject *Sender)
+{
+//actualisation
+
+Query3->SQL->Text="SELECT * FROM matieres Order By id_m ";
+	Query3->Open();
+	Query3->Active=true;
+
+	if (id_m->Text == "") {
+
+Query1->SQL->Text="SELECT id_m FROM matieres  WHERE id_m LIKE '__MA%' Order By id_m ";
+Query1->Open();
+bool test= Query1->IsEmpty();
+if(test)
+  {
+   TDate date =Now();
+   id_m->Text=date.FormatString("YY")+"MA001";
+  }
+else
+  {
+   Query1->Last();
+   AnsiString mat= Query1->FieldByName("id_m")->AsString;
+   mat=mat.Trim(); mat = mat.SubString(1,2);
+   TDate date=Now();
+   AnsiString a,num;
+   a=date.FormatString("YY");
+
+   if(mat==a)
+	 {
+		AnsiString code = Query1->FieldByName("id_m")->AsString;
+		code=code.Trim();code=code.SubString(code.Pos("E")+1,code.Length());
+		code=code.ToDouble()+1;
+		if(code.ToDouble()<=9)
+				{
+				code="00"+code;
+				}
+		 else
+			{
+				  if(code.ToDouble()<=99)
+
+						code="0"+code;
+			}
+				 id_m->Text=mat+"MA"+code;
+		 }
+   else
+	  id_m->Text=a+"MA001";
+   }
+  }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::DBGrid4CellClick(TColumn *Column)
+{
+if (DBGrid4->SelectedRows->Count>0) {
+	AnsiString idpl1="";
+	 TDataSet * ligne = DBGrid4 ->DataSource->DataSet;
+	 idpl1= ligne ->Fields->Fields[0] -> AsString;
+
+	 k->Text= idpl1  ;
+
+}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::Button4Click(TObject *Sender)
+{
+Close();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::Button26Click(TObject *Sender)
+{
+Close();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::Button55Click(TObject *Sender)
+{
+Close();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::Button54Click(TObject *Sender)
+{
+Close();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::Button35Click(TObject *Sender)
+{
+Close();
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall Tgprincipal::Button28Click(TObject *Sender)
+{
+Query1->SQL->Text="UPDATE matieres SET id_m='"+ id_m->Text+"',type_ens='"+
+typ_ens->Text+"',type_m='"+typ_m->Text+"',coef='"+coef->Text+"',nom_m='"+
+ntm->Text+"',init_mat='"+init_m->Text+"' WHERE matieres ='"+k->Text+"'   ";
+Query1->ExecSQL();
+
+
+typ_ens ->Text="";
+ typ_m->Text="";
+ coef->Text="";
+ ntm->Text="";
+ init_m->Text="";
+
 }
 //---------------------------------------------------------------------------
 

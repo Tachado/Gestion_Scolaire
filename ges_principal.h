@@ -169,7 +169,7 @@ __published:	// Composants gérés par l'EDI
 	TLabel *Label4;
 	TGroupBox *GroupBox18;
 	TLabel *Label5;
-	TEdit *Edit3;
+	TEdit *id_m;
 	TGroupBox *GroupBox21;
 	TLabel *Label6;
 	TGroupBox *GroupBox27;
@@ -280,8 +280,8 @@ __published:	// Composants gérés par l'EDI
 	TImage *Image5;
 	TGroupBox *GroupBox45;
 	TLabel *Label55;
-	TEdit *Edit19;
-	TEdit *Edit20;
+	TEdit *ntm;
+	TEdit *init_m;
 	TGroupBox *GroupBox46;
 	TButton *Button25;
 	TButton *Button26;
@@ -301,13 +301,13 @@ __published:	// Composants gérés par l'EDI
 	TComboBox *esgt;
 	TComboBox *clas;
 	TLabel *Label67;
-	TComboBox *ComboBox10;
+	TComboBox *typ_ens;
 	TLabel *Label69;
-	TComboBox *ComboBox11;
+	TComboBox *typ_m;
 	TLabel *Label59;
 	TLabel *Label70;
 	TLabel *Label57;
-	TEdit *Edit14;
+	TEdit *coef;
 	TGroupBox *GroupBox48;
 	TLabel *Label62;
 	TLabel *Label63;
@@ -442,6 +442,15 @@ __published:	// Composants gérés par l'EDI
 	void __fastcall Modifier1Click(TObject *Sender);
 	void __fastcall Button21Click(TObject *Sender);
 	void __fastcall Button25Click(TObject *Sender);
+	void __fastcall TabSheet7Show(TObject *Sender);
+	void __fastcall DBGrid4CellClick(TColumn *Column);
+	void __fastcall Button4Click(TObject *Sender);
+	void __fastcall Button26Click(TObject *Sender);
+	void __fastcall Button55Click(TObject *Sender);
+	void __fastcall Button54Click(TObject *Sender);
+	void __fastcall Button35Click(TObject *Sender);
+	void __fastcall Button28Click(TObject *Sender);
+
 private:	// Déclarations utilisateur
 public:		// Déclarations utilisateur
 	__fastcall Tgprincipal(TComponent* Owner);
