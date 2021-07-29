@@ -4,6 +4,7 @@
 #pragma hdrstop
 
 #include "ges_principal.h"
+#include "ges_login.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -61,13 +62,6 @@ if (DBGrid3->SelectedRows->Count>0) {
 }
 }
 //---------------------------------------------------------------------------
-
-void __fastcall Tgprincipal::Button18Click(TObject *Sender)
-{
-Close();
-}
-//---------------------------------------------------------------------------
-
 void __fastcall Tgprincipal::TabSheet4Show(TObject *Sender)
 {
 //actualisation
@@ -101,7 +95,7 @@ Query1->ExecSQL();
 
 void __fastcall Tgprincipal::Button19Click(TObject *Sender)
 {
-if (MessageDlgPos("êtes-vous sure de vouloir supprimer ?", mtConfirmation, mbYesNoCancel, 0, 500, 300, mbYes)== IDYES)
+if (MessageDlgPos("ï¿½tes-vous sure de vouloir supprimer ?", mtConfirmation, mbYesNoCancel, 0, 500, 300, mbYes)== IDYES)
  {
   Query2->SQL->Text=" DELETE FROM classes WHERE id_class='"+k->Text+"' ";
 Query1->ExecSQL();
@@ -113,7 +107,7 @@ Query1->ExecSQL();
 void __fastcall Tgprincipal::Supprimer1Click(TObject *Sender)
 {
 		// supprimer dans class
-   if (MessageDlgPos("êtes-vous sure de vouloir supprimer ?", mtConfirmation, mbYesNoCancel, 0, 500, 300, mbYes)== IDYES)
+   if (MessageDlgPos("ï¿½tes-vous sure de vouloir supprimer ?", mtConfirmation, mbYesNoCancel, 0, 500, 300, mbYes)== IDYES)
  {
   Query2->SQL->Text=" DELETE FROM classes WHERE id_class='"+k->Text+"' ";
 Query1->ExecSQL();
@@ -174,10 +168,116 @@ void __fastcall Tgprincipal::Button21Click(TObject *Sender)
 //---------------------------------------------------------------------------
 
 
+void __fastcall Tgprincipal::TabSheet5Show(TObject *Sender)
+{
+//-- generation automatique de l'identifiant unique de l'ï¿½lï¿½ve
 void __fastcall Tgprincipal::Button25Click(TObject *Sender)
 {
 // enregistrer une matiere
 	if ( (typ_ens->Text != "") & (typ_m->Text != "") &(coef->Text != "") & (ntm->Text !="") &(init_m->Text !="") ) {
+
+Query1->SQL->Text="SELECT id_e FROM eleves WHERE id_e LIKE '__EL%' Order By id_e ";
+Query1->Open();
+bool test = Query1->IsEmpty();
+if(test)
+  {
+   TDate date = Now();
+   id_e->Text = date.FormatString("YY")+"EL0001";
+  }
+else
+  {
+   Query1->Last();
+   AnsiString mat = Query1->FieldByName("id_e")->AsString;
+   mat = mat.Trim(); mat = mat.SubString(1,2);
+   TDate date = Now();
+   AnsiString a,num;
+   a = date.FormatString("YY");
+
+   if(mat == a)
+	 {
+		AnsiString code = Query1->FieldByName("id_e")->AsString;
+		code = code.Trim(); code = code.SubString(code.Pos("L")+1,code.Length());
+		code = code.ToDouble()+1;
+		if(code.ToDouble()<=9)
+			{
+				code="000"+code;
+			}
+		 else if(code.ToDouble()<=99)
+			{
+				code="00"+code;
+			}
+		 else if(code.ToDouble()<=999)
+			{
+				code="0"+code;
+			}
+				 id_e -> Text = mat+"EL"+code;
+	 }else
+	 {
+		id_e->Text = a + "EL0001";
+	 }
+
+  }
+//----
+
+// Code listage auto ComboBox Parent_e
+	Query2->SQL->Text= "SELECT nom_pa FROM parents  Order By id_pa";
+	Query2->Open();
+	parent_e->Clear();
+	while(Query2->Eof==false)
+	{
+	parent_e->Items->Add(Query2->FieldByName("nom_pa")->AsString);
+	Query2->Next();
+	}
+// Code listage auto ComboBox classe_e
+	Query2->SQL->Text= "SELECT nom_class FROM classes  Order By id_class";
+	Query2->Open();
+	classe_e->Clear();
+	while(Query2->Eof==false)
+	{
+	classe_e->Items->Add(Query2->FieldByName("nom_class")->AsString);
+	Query2->Next();
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::Button3Click(TObject *Sender)
+{
+// Requï¿½te de sï¿½lection de l'ID du parent en fonction de son nom pour enregistrement
+	Query2->SQL->Text= "SELECT id_pa FROM parents  Order By id_pa";
+	Query2->Open();
+	String id_pax = Query2->FieldByName("id_pa")->AsString;
+// Requï¿½te de sï¿½lection de l'ID de la classe en fonction de son nom pour enregistrement
+	Query2->SQL->Text= "SELECT id_class FROM classes  Order By id_class";
+	Query2->Open();
+	String id_classx = Query2->FieldByName("id_class")->AsString;
+
+// Insertion des donnï¿½es dans l'entitï¿½ eleves de la BD
+	Query1 ->SQL->Text =" INSERT INTO eleves (id_e, id_pa, id_class, nom_e, sexe_e, datenais_e, lieunais_e, img_e) VALUES ('"+
+	id_e->Text+"','"+id_pax+"','"+id_classx+"','"+nom_e->Text+"','"+sexe_e->Text+"','"+
+	date_naiss->Date.FormatString("YYYY-MM-DD")+"','"+lieu_naiss->Text+"','') ";
+	Query1->ExecSQL();
+
+//Vidage des champs aprï¿½s enregistrement
+	id_e->Text        = "";
+	parent_e ->Text   = "";
+	classe_e ->Text   = "";
+	nom_e ->Text      = "";
+	sexe_e ->Text     = "";
+	date_naiss ->Date = Now();
+	lieu_naiss ->Text = "";
+
+// Actualisation du TabSheet5 pour renouveller l'ID automatiquement
+TabSheet5->OnShow(this);
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::FormClose(TObject *Sender, TCloseAction &Action)
+{
+glogin->Close();
+}
+//---------------------------------------------------------------------------
+
 
 Query3->SQL->Text=" INSERT INTO matieres (id_m,type_ens, type_m, coef, nom_m,init_mat) VALUES ('"+id_m->Text+"','"+typ_ens->Text+"','"+typ_m->Text+"','"+coef->Text+"','"+ntm->Text+"','"+init_m->Text+"')";
 Query3->ExecSQL() ;

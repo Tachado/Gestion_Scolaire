@@ -164,12 +164,20 @@ __published:	// Composants gérés par l'EDI
 	TLabel *Label2;
 	TGroupBox *GroupBox16;
 	TLabel *Label3;
+<<<<<<< Updated upstream
 	TEdit *Edit2;
+=======
+	TEdit *id_e;
+>>>>>>> Stashed changes
 	TGroupBox *GroupBox17;
 	TLabel *Label4;
 	TGroupBox *GroupBox18;
 	TLabel *Label5;
+<<<<<<< Updated upstream
 	TEdit *id_m;
+=======
+	TEdit *Edit3;
+>>>>>>> Stashed changes
 	TGroupBox *GroupBox21;
 	TLabel *Label6;
 	TGroupBox *GroupBox27;
@@ -202,6 +210,7 @@ __published:	// Composants gérés par l'EDI
 	TLabel *Label31;
 	TLabel *Label32;
 	TLabel *Label33;
+<<<<<<< Updated upstream
 	TLabel *Label34;
 	TLabel *Label35;
 	TLabel *Label36;
@@ -209,6 +218,15 @@ __published:	// Composants gérés par l'EDI
 	TEdit *Edit9;
 	TEdit *Edit10;
 	TButton *Button1;
+=======
+	TLabel *nliste2;
+	TLabel *Label35;
+	TLabel *Label36;
+	TDBGrid *DBGrid2;
+	TEdit *recherche2;
+	TEdit *idselect2;
+	TButton *actualise2;
+>>>>>>> Stashed changes
 	TGroupBox *GroupBox34;
 	TImage *Image1;
 	TGroupBox *GroupBox35;
@@ -219,6 +237,7 @@ __published:	// Composants gérés par l'EDI
 	TLabel *Label42;
 	TLabel *Label43;
 	TLabel *Label45;
+<<<<<<< Updated upstream
 	TEdit *Edit11;
 	TComboBox *ComboBox1;
 	TComboBox *ComboBox2;
@@ -226,6 +245,15 @@ __published:	// Composants gérés par l'EDI
 	TDateTimePicker *DateTimePicker1;
 	TEdit *lieu_naiss;
 	TEdit *Edit15;
+=======
+	TEdit *nom_e;
+	TComboBox *parent_e;
+	TComboBox *classe_e;
+	TComboBox *sexe_e;
+	TDateTimePicker *date_naiss;
+	TEdit *lieu_naiss;
+	TEdit *contact_e;
+>>>>>>> Stashed changes
 	TGroupBox *GroupBox36;
 	TButton *Button3;
 	TButton *Button4;
@@ -280,8 +308,13 @@ __published:	// Composants gérés par l'EDI
 	TImage *Image5;
 	TGroupBox *GroupBox45;
 	TLabel *Label55;
+<<<<<<< Updated upstream
 	TEdit *ntm;
 	TEdit *init_m;
+=======
+	TEdit *Edit19;
+	TEdit *Edit20;
+>>>>>>> Stashed changes
 	TGroupBox *GroupBox46;
 	TButton *Button25;
 	TButton *Button26;
@@ -301,6 +334,7 @@ __published:	// Composants gérés par l'EDI
 	TComboBox *esgt;
 	TComboBox *clas;
 	TLabel *Label67;
+<<<<<<< Updated upstream
 	TComboBox *typ_ens;
 	TLabel *Label69;
 	TComboBox *typ_m;
@@ -308,6 +342,15 @@ __published:	// Composants gérés par l'EDI
 	TLabel *Label70;
 	TLabel *Label57;
 	TEdit *coef;
+=======
+	TComboBox *ComboBox10;
+	TLabel *Label69;
+	TComboBox *ComboBox11;
+	TLabel *Label59;
+	TLabel *Label70;
+	TLabel *Label57;
+	TEdit *Edit14;
+>>>>>>> Stashed changes
 	TGroupBox *GroupBox48;
 	TLabel *Label62;
 	TLabel *Label63;
@@ -441,6 +484,7 @@ __published:	// Composants gérés par l'EDI
 	void __fastcall Supprimer1Click(TObject *Sender);
 	void __fastcall Modifier1Click(TObject *Sender);
 	void __fastcall Button21Click(TObject *Sender);
+<<<<<<< Updated upstream
 	void __fastcall Button25Click(TObject *Sender);
 	void __fastcall TabSheet7Show(TObject *Sender);
 	void __fastcall DBGrid4CellClick(TColumn *Column);
@@ -450,6 +494,9 @@ __published:	// Composants gérés par l'EDI
 	void __fastcall Button54Click(TObject *Sender);
 	void __fastcall Button35Click(TObject *Sender);
 
+=======
+	void __fastcall TabSheet5Show(TObject *Sender);
+>>>>>>> Stashed changes
 private:	// Déclarations utilisateur
 public:		// Déclarations utilisateur
 	__fastcall Tgprincipal(TComponent* Owner);

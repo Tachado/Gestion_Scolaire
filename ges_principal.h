@@ -38,7 +38,7 @@
 //---------------------------------------------------------------------------
 class Tgprincipal : public TForm
 {
-__published:	// Composants gérés par l'EDI
+__published:	// Composants gï¿½rï¿½s par l'EDI
 	TMainMenu *MainMenu1;
 	TMenuItem *Fichiers1;
 	TMenuItem *Outils1;
@@ -164,7 +164,7 @@ __published:	// Composants gérés par l'EDI
 	TLabel *Label2;
 	TGroupBox *GroupBox16;
 	TLabel *Label3;
-	TEdit *Edit2;
+	TEdit *id_e;
 	TGroupBox *GroupBox17;
 	TLabel *Label4;
 	TGroupBox *GroupBox18;
@@ -202,13 +202,13 @@ __published:	// Composants gérés par l'EDI
 	TLabel *Label31;
 	TLabel *Label32;
 	TLabel *Label33;
-	TLabel *Label34;
+	TLabel *nliste2;
 	TLabel *Label35;
 	TLabel *Label36;
 	TDBGrid *DBGrid2;
-	TEdit *Edit9;
-	TEdit *Edit10;
-	TButton *Button1;
+	TEdit *recherche2;
+	TEdit *idselect2;
+	TButton *actualise2;
 	TGroupBox *GroupBox34;
 	TImage *Image1;
 	TGroupBox *GroupBox35;
@@ -219,13 +219,13 @@ __published:	// Composants gérés par l'EDI
 	TLabel *Label42;
 	TLabel *Label43;
 	TLabel *Label45;
-	TEdit *Edit11;
-	TComboBox *ComboBox1;
-	TComboBox *ComboBox2;
-	TComboBox *ComboBox3;
-	TDateTimePicker *DateTimePicker1;
+	TEdit *nom_e;
+	TComboBox *parent_e;
+	TComboBox *classe_e;
+	TComboBox *sexe_e;
+	TDateTimePicker *date_naiss;
 	TEdit *lieu_naiss;
-	TEdit *Edit15;
+	TEdit *contact_e;
 	TGroupBox *GroupBox36;
 	TButton *Button3;
 	TButton *Button4;
@@ -434,13 +434,15 @@ __published:	// Composants gérés par l'EDI
 	void __fastcall Button9Click(TObject *Sender);
 	void __fastcall Button17Click(TObject *Sender);
 	void __fastcall DBGrid3CellClick(TColumn *Column);
-	void __fastcall Button18Click(TObject *Sender);
 	void __fastcall TabSheet4Show(TObject *Sender);
 	void __fastcall Button20Click(TObject *Sender);
 	void __fastcall Button19Click(TObject *Sender);
 	void __fastcall Supprimer1Click(TObject *Sender);
 	void __fastcall Modifier1Click(TObject *Sender);
 	void __fastcall Button21Click(TObject *Sender);
+	void __fastcall TabSheet5Show(TObject *Sender);
+	void __fastcall Button3Click(TObject *Sender);
+	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall Button25Click(TObject *Sender);
 	void __fastcall TabSheet7Show(TObject *Sender);
 	void __fastcall DBGrid4CellClick(TColumn *Column);
@@ -451,8 +453,8 @@ __published:	// Composants gérés par l'EDI
 	void __fastcall Button35Click(TObject *Sender);
 	void __fastcall Button28Click(TObject *Sender);
 
-private:	// Déclarations utilisateur
-public:		// Déclarations utilisateur
+private:	// Dï¿½clarations utilisateur
+public:		// Dï¿½clarations utilisateur
 	__fastcall Tgprincipal(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
