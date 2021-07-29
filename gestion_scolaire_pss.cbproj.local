@@ -10,11 +10,11 @@
     <Transaction>2020/07/04 14:02:16.000.243,=C:\Users\mfs\Documents\Embarcadero\Studio\Projets\Unit1.cpp</Transaction>
     <Transaction>2020/07/04 14:02:16.000.200,=C:\Users\mfs\Documents\Embarcadero\Studio\Projets\Project1PCH1.h</Transaction>
     <Transaction>2020/07/04 14:02:53.000.155,=D:\PROJET Embarcadero 2020\Gestion Scolaire\ges_demarrage.cpp</Transaction>
+    <Transaction>2020/07/04 14:02:53.000.401,=D:\PROJET Embarcadero 2020\Gestion Scolaire\ges_login.cpp</Transaction>
     <Transaction>2020/07/04 14:02:53.000.565,=D:\PROJET Embarcadero 2020\Gestion Scolaire\gestion_scolaire_p.cpp</Transaction>
     <Transaction>2020/07/04 14:02:53.000.527,=D:\PROJET Embarcadero 2020\Gestion Scolaire\ges_principal.cpp</Transaction>
-    <Transaction>2020/07/04 14:02:53.000.401,=D:\PROJET Embarcadero 2020\Gestion Scolaire\ges_login.cpp</Transaction>
-    <Transaction>2020/07/04 14:04:40.000.333,C:\Users\mfs\Documents\Embarcadero\Studio\Projets\Project1PCH1.h=D:\PROJET Embarcadero 2020\Gestion Scolaire\gestion_scolaire_ps.h</Transaction>
-    <Transaction>2020/07/04 14:05:13.000.566,C:\Users\mfs\Documents\Embarcadero\Studio\Projets\Project1.cbproj=D:\PROJET Embarcadero 2020\Gestion Scolaire\gestion_scolaire_pss.cbproj</Transaction>
+    <Transaction>2020/07/04 14:04:40.000.333,D:\PROJET Embarcadero 2020\Gestion Scolaire\gestion_scolaire_ps.h=C:\Users\mfs\Documents\Embarcadero\Studio\Projets\Project1PCH1.h</Transaction>
+    <Transaction>2020/07/04 14:05:13.000.566,D:\PROJET Embarcadero 2020\Gestion Scolaire\gestion_scolaire_pss.cbproj=C:\Users\mfs\Documents\Embarcadero\Studio\Projets\Project1.cbproj</Transaction>
     <Transaction>2020/07/04 14:06:14.000.592,D:\PROJET Embarcadero 2020\Gestion Scolaire\gestion_scolaire_p.cpp=</Transaction>
   </Transactions>
 </BorlandProject>

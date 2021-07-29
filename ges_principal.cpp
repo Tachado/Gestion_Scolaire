@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------------
+﻿//---------------------------------------------------------------------------
 
 #include <vcl.h>
 #pragma hdrstop
@@ -171,11 +171,6 @@ void __fastcall Tgprincipal::Button21Click(TObject *Sender)
 void __fastcall Tgprincipal::TabSheet5Show(TObject *Sender)
 {
 //-- generation automatique de l'identifiant unique de l'�l�ve
-void __fastcall Tgprincipal::Button25Click(TObject *Sender)
-{
-// enregistrer une matiere
-	if ( (typ_ens->Text != "") & (typ_m->Text != "") &(coef->Text != "") & (ntm->Text !="") &(init_m->Text !="") ) {
-
 Query1->SQL->Text="SELECT id_e FROM eleves WHERE id_e LIKE '__EL%' Order By id_e ";
 Query1->Open();
 bool test = Query1->IsEmpty();
@@ -277,18 +272,22 @@ void __fastcall Tgprincipal::FormClose(TObject *Sender, TCloseAction &Action)
 glogin->Close();
 }
 //---------------------------------------------------------------------------
+void __fastcall Tgprincipal::Button25Click(TObject *Sender)
+{
+// enregistrer une matiere
+	if ( (typ_ens->Text != "") & (typ_m->Text != "") &(coef->Text != "") & (ntm->Text !="") &(init_m->Text !="") )
+	{
 
+	 Query3->SQL->Text=" INSERT INTO matieres (id_m,type_ens, type_m, coef, nom_m,init_mat) VALUES ('"+id_m->Text+"','"+typ_ens->Text+"','"+typ_m->Text+"','"+coef->Text+"','"+ntm->Text+"','"+init_m->Text+"')";
+	 Query3->ExecSQL() ;
 
-Query3->SQL->Text=" INSERT INTO matieres (id_m,type_ens, type_m, coef, nom_m,init_mat) VALUES ('"+id_m->Text+"','"+typ_ens->Text+"','"+typ_m->Text+"','"+coef->Text+"','"+ntm->Text+"','"+init_m->Text+"')";
-Query3->ExecSQL() ;
+	 typ_ens ->Text="";
+	 typ_m->Text="";
+	 coef->Text="";
+	 ntm->Text="";
+	 init_m->Text="";
 
- typ_ens ->Text="";
- typ_m->Text="";
- coef->Text="";
- ntm->Text="";
- init_m->Text="";
-
- TabSheet7->OnShow(this) ;
+	 TabSheet7->OnShow(this) ;
 	}
 	else{
 	ShowMessage("Veillez renseigner toutes les informations avant d'enregistrer");
@@ -300,16 +299,15 @@ Query3->ExecSQL() ;
 void __fastcall Tgprincipal::TabSheet7Show(TObject *Sender)
 {
 //actualisation
-
-Query3->SQL->Text="SELECT * FROM matieres Order By id_m ";
+	Query3->SQL->Text="SELECT * FROM matieres Order By id_m ";
 	Query3->Open();
 	Query3->Active=true;
 
-	if (id_m->Text == "") {
-
-Query1->SQL->Text="SELECT id_m FROM matieres  WHERE id_m LIKE '__MA%' Order By id_m ";
-Query1->Open();
-bool test= Query1->IsEmpty();
+if (id_m->Text == "")
+{
+	Query1->SQL->Text="SELECT id_m FROM matieres  WHERE id_m LIKE '__MA%' Order By id_m ";
+	Query1->Open();
+	bool test= Query1->IsEmpty();
 if(test)
   {
    TDate date =Now();
@@ -408,4 +406,6 @@ typ_ens ->Text="";
 
 }
 //---------------------------------------------------------------------------
+
+
 
