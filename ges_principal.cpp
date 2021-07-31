@@ -171,8 +171,14 @@ void __fastcall Tgprincipal::Button21Click(TObject *Sender)
 void __fastcall Tgprincipal::TabSheet5Show(TObject *Sender)
 {
 //-- generation automatique de l'identifiant unique de l'�l�ve
-Query1->SQL->Text="SELECT id_e FROM eleves WHERE id_e LIKE '__EL%' Order By id_e ";
-Query1->Open();
+
+Query3->SQL->Text="SELECT * FROM eleves Order By id_e ";
+	Query3->Open();
+	Query3->Active=true;
+
+
+Query3->SQL->Text="SELECT id_e FROM eleves WHERE id_e LIKE '__EL%' Order By id_e ";
+Query3->Open();
 bool test = Query1->IsEmpty();
 if(test)
   {
@@ -181,8 +187,8 @@ if(test)
   }
 else
   {
-   Query1->Last();
-   AnsiString mat = Query1->FieldByName("id_e")->AsString;
+   Query3->Last();
+   AnsiString mat = Query3->FieldByName("id_e")->AsString;
    mat = mat.Trim(); mat = mat.SubString(1,2);
    TDate date = Now();
    AnsiString a,num;
@@ -215,22 +221,22 @@ else
 //----
 
 // Code listage auto ComboBox Parent_e
-	Query2->SQL->Text= "SELECT nom_pa FROM parents  Order By id_pa";
-	Query2->Open();
+	Query3->SQL->Text= "SELECT nom_pa FROM parents  Order By id_pa";
+	Query3->Open();
 	parent_e->Clear();
-	while(Query2->Eof==false)
+	while(Query3->Eof==false)
 	{
-	parent_e->Items->Add(Query2->FieldByName("nom_pa")->AsString);
-	Query2->Next();
+	parent_e->Items->Add(Query3->FieldByName("nom_pa")->AsString);
+	Query3->Next();
 	}
 // Code listage auto ComboBox classe_e
-	Query2->SQL->Text= "SELECT nom_class FROM classes  Order By id_class";
-	Query2->Open();
+	Query3->SQL->Text= "SELECT nom_class FROM classes  Order By id_class";
+	Query3->Open();
 	classe_e->Clear();
-	while(Query2->Eof==false)
+	while(Query3->Eof==false)
 	{
-	classe_e->Items->Add(Query2->FieldByName("nom_class")->AsString);
-	Query2->Next();
+	classe_e->Items->Add(Query3->FieldByName("nom_class")->AsString);
+	Query3->Next();
 	}
 }
 //---------------------------------------------------------------------------
@@ -462,4 +468,123 @@ void __fastcall Tgprincipal::Modifier2Click(TObject *Sender)
    Query1->Active=true;
 }
 //---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::DBGrid2CellClick(TColumn *Column)
+{
+if (DBGrid2->SelectedRows->Count>0) {
+	AnsiString idpl1="";
+	 TDataSet * ligne = DBGrid2 ->DataSource->DataSet;
+	 idpl1= ligne ->Fields->Fields[0] -> AsString;
+
+	 k->Text= idpl1  ;
+
+}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::Button33Click(TObject *Sender)
+{
+// enregistrer une parents et son contact
+	if ( (ntp_pa->Text != "") & (resid->Text != "") &(sexe_pa->Text != "") & (tel_pa->Text !="") )
+	{
+
+
+Query1->SQL->Text=" INSERT INTO parents (nom_pa,resid,sexe_pa) VALUES ('"+ntp_pa->Text+"','"+resid->Text+"','"+sexe_pa->Text+"')";
+Query1->ExecSQL() ;
+		Query1->SQL->Text=" INSERT INTO contact_pa (cont_pa) VALUES ('"+tel_pa->Text+"')";
+Query1->ExecSQL() ;
+
+ntp_pa  ->Text="";
+ resid  ->Text="";
+ sexe_pa ->Text="";
+ tel_pa ->Text="";
+
+
+	 TabSheet11->OnShow(this) ;
+	}
+	else{
+	ShowMessage("Veillez renseigner toutes les informations avant d'enregistrer");
+}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::Button36Click(TObject *Sender)
+{
+if (MessageDlgPos("�tes-vous sure de vouloir supprimer ?", mtConfirmation, mbYesNoCancel, 0, 500, 300, mbYes)== IDYES)
+ {
+  Query2->SQL->Text=" DELETE FROM parents WHERE id_pa='"+k->Text+"' ";
+Query1->ExecSQL();
+}
+		TabSheet11->OnShow(this);  // pour actualiser la page
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::Button38Click(TObject *Sender)
+{
+ntp_pa  ->Text="";
+ resid  ->Text="";
+ sexe_pa ->Text="";
+ tel_pa ->Text="";
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::Supprimer3Click(TObject *Sender)
+{
+if (MessageDlgPos("�tes-vous sure de vouloir supprimer ?", mtConfirmation, mbYesNoCancel, 0, 500, 300, mbYes)== IDYES)
+ {
+  Query2->SQL->Text=" DELETE FROM parents WHERE id_pa='"+k->Text+"' ";
+Query1->ExecSQL();
+}
+		TabSheet11->OnShow(this);  // pour actualiser la page
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::Button37Click(TObject *Sender)
+{
+// modifier dans parensts
+
+Query1->SQL->Text="UPDATE parents SET nom_pa='"+ ntp_pa->Text+"',resid='"+
+resid->Text+"',sexe_pa='"+sexe_pa->Text+"' WHERE id_pa='"+k->Text+"'   ";
+Query1->ExecSQL();
+
+Query1->SQL->Text="UPDATE contact_pa SET cont_pa='"+ tel_pa->Text+"' WHERE id_pa='"+k->Text+"'   ";
+Query1->ExecSQL();
+					  //nom_pa,resid,sexe_pa
+	ntp_pa  ->Text="";
+ resid  ->Text="";
+ sexe_pa ->Text="";
+ tel_pa ->Text="";
+
+
+	TabSheet11->OnShow(this);  // pour actualiser la page
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::Modifier3Click(TObject *Sender)
+{
+		 AnsiString id_pa1,nom_pa1, resid1, sexe_pa1, cont_pa1;
+	TDate dl_pay1;
+   if (DBGrid4->SelectedRows->Count>0) {
+	 TDataSet * ligne = DBGrid4 ->DataSource->DataSet;
+	 id_pa1= ligne ->Fields->FieldByName("id_pa")->AsAnsiString;
+	 nom_pa1= ligne ->Fields->FieldByName("nom_pa")->AsAnsiString;
+	 resid1 = ligne ->Fields->FieldByName("resid")->AsAnsiString;
+	 sexe_pa1= ligne ->Fields->FieldByName("sexe_pa")->AsAnsiString;
+	 cont_pa1=  ligne ->Fields->FieldByName("cont_pa")->AsAnsiString;
+
+
+								 //nom_pa,resid,sexe_pa
+ ntp_pa  ->Text=nom_pa1;
+ resid  ->Text=resid1;
+ sexe_pa ->Text=sexe_pa1;
+ tel_pa ->Text=cont_pa1;
+
+   }
+	Query1->SQL->Text="SELECT * FROM parents WHERE id_pa='"+id_pa1+"'  ";
+   Query1->Open();
+   Query1->Active=true;
+}
+//---------------------------------------------------------------------------
+
 

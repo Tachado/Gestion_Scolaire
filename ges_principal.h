@@ -326,9 +326,9 @@ __published:	// Composants g�r�s par l'EDI
 	TLabel *Label76;
 	TLabel *Label78;
 	TLabel *Label82;
-	TEdit *Edit25;
-	TComboBox *ComboBox12;
-	TEdit *Edit27;
+	TEdit *ntp_pa;
+	TComboBox *sexe_pa;
+	TEdit *tel_pa;
 	TGroupBox *GroupBox51;
 	TButton *Button33;
 	TButton *Button35;
@@ -341,7 +341,7 @@ __published:	// Composants g�r�s par l'EDI
 	TImage *Image8;
 	TButton *Button41;
 	TLabel *Label79;
-	TEdit *Edit28;
+	TEdit *resid;
 	TGroupBox *GroupBox53;
 	TGroupBox *GroupBox54;
 	TMemo *Memo1;
@@ -435,6 +435,11 @@ __published:	// Composants g�r�s par l'EDI
 	TMenuItem *Modifier2;
 	TMenuItem *Supprimer2;
 	TDataSource *DataSource3;
+	TDataSource *DataSource4;
+	TFDQuery *Query4;
+	TPopupMenu *PopupMenu3;
+	TMenuItem *Modifier3;
+	TMenuItem *Supprimer3;
 	void __fastcall Button9Click(TObject *Sender);
 	void __fastcall Button17Click(TObject *Sender);
 	void __fastcall DBGrid3CellClick(TColumn *Column);
@@ -459,6 +464,13 @@ __published:	// Composants g�r�s par l'EDI
 	void __fastcall Button27Click(TObject *Sender);
 	void __fastcall Supprimer2Click(TObject *Sender);
 	void __fastcall Modifier2Click(TObject *Sender);
+	void __fastcall DBGrid2CellClick(TColumn *Column);
+	void __fastcall Button33Click(TObject *Sender);
+	void __fastcall Button36Click(TObject *Sender);
+	void __fastcall Button38Click(TObject *Sender);
+	void __fastcall Supprimer3Click(TObject *Sender);
+	void __fastcall Button37Click(TObject *Sender);
+	void __fastcall Modifier3Click(TObject *Sender);
 
 private:	// D�clarations utilisateur
 public:		// D�clarations utilisateur
