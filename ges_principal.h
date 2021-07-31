@@ -169,7 +169,7 @@ __published:	// Composants g�r�s par l'EDI
 	TLabel *Label4;
 	TGroupBox *GroupBox18;
 	TLabel *Label5;
-	TEdit *id_m;
+	TEdit *id_mj;
 	TGroupBox *GroupBox21;
 	TLabel *Label6;
 	TGroupBox *GroupBox27;
@@ -431,6 +431,10 @@ __published:	// Composants g�r�s par l'EDI
 	TMenuItem *Modifier1;
 	TMenuItem *Supprimer1;
 	TImage *Image3;
+	TPopupMenu *PopupMenu2;
+	TMenuItem *Modifier2;
+	TMenuItem *Supprimer2;
+	TDataSource *DataSource3;
 	void __fastcall Button9Click(TObject *Sender);
 	void __fastcall Button17Click(TObject *Sender);
 	void __fastcall DBGrid3CellClick(TColumn *Column);
@@ -452,6 +456,9 @@ __published:	// Composants g�r�s par l'EDI
 	void __fastcall Button54Click(TObject *Sender);
 	void __fastcall Button35Click(TObject *Sender);
 	void __fastcall Button28Click(TObject *Sender);
+	void __fastcall Button27Click(TObject *Sender);
+	void __fastcall Supprimer2Click(TObject *Sender);
+	void __fastcall Modifier2Click(TObject *Sender);
 
 private:	// D�clarations utilisateur
 public:		// D�clarations utilisateur

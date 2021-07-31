@@ -278,14 +278,17 @@ void __fastcall Tgprincipal::Button25Click(TObject *Sender)
 	if ( (typ_ens->Text != "") & (typ_m->Text != "") &(coef->Text != "") & (ntm->Text !="") &(init_m->Text !="") )
 	{
 
-	 Query3->SQL->Text=" INSERT INTO matieres (id_m,type_ens, type_m, coef, nom_m,init_mat) VALUES ('"+id_m->Text+"','"+typ_ens->Text+"','"+typ_m->Text+"','"+coef->Text+"','"+ntm->Text+"','"+init_m->Text+"')";
-	 Query3->ExecSQL() ;
 
-	 typ_ens ->Text="";
-	 typ_m->Text="";
-	 coef->Text="";
-	 ntm->Text="";
-	 init_m->Text="";
+Query3->SQL->Text=" INSERT INTO matieres (id_m,type_ens, type_m, coef, nom_m,init_mat) VALUES ('"+id_mj->Text+"','"+typ_ens->Text+"','"+typ_m->Text+"','"+coef->Text+"','"+ntm->Text+"','"+init_m->Text+"')";
+Query3->ExecSQL() ;
+
+
+id_mj ->Text="";
+ typ_ens ->Text="";
+ typ_m->Text="";
+ coef->Text="";
+ ntm->Text="";
+ init_m->Text="";
 
 	 TabSheet7->OnShow(this) ;
 	}
@@ -303,15 +306,15 @@ void __fastcall Tgprincipal::TabSheet7Show(TObject *Sender)
 	Query3->Open();
 	Query3->Active=true;
 
-if (id_m->Text == "")
+	if (id_mj->Text == "")
 {
-	Query1->SQL->Text="SELECT id_m FROM matieres  WHERE id_m LIKE '__MA%' Order By id_m ";
-	Query1->Open();
-	bool test= Query1->IsEmpty();
+Query1->SQL->Text="SELECT id_m FROM matieres  WHERE id_m LIKE '__MA%' Order By id_m ";
+Query1->Open();
+bool test= Query1->IsEmpty();
 if(test)
   {
    TDate date =Now();
-   id_m->Text=date.FormatString("YY")+"MA001";
+   id_mj->Text=date.FormatString("YY")+"MA001";
   }
 else
   {
@@ -325,7 +328,7 @@ else
    if(mat==a)
 	 {
 		AnsiString code = Query1->FieldByName("id_m")->AsString;
-		code=code.Trim();code=code.SubString(code.Pos("E")+1,code.Length());
+		code=code.Trim();code=code.SubString(code.Pos("A")+1,code.Length());
 		code=code.ToDouble()+1;
 		if(code.ToDouble()<=9)
 				{
@@ -337,10 +340,10 @@ else
 
 						code="0"+code;
 			}
-				 id_m->Text=mat+"MA"+code;
+				 id_mj->Text=mat+"MA"+code;
 		 }
    else
-	  id_m->Text=a+"MA001";
+	  id_mj->Text=a+"MA001";
    }
   }
 }
@@ -392,7 +395,7 @@ Close();
 
 void __fastcall Tgprincipal::Button28Click(TObject *Sender)
 {
-Query1->SQL->Text="UPDATE matieres SET id_m='"+ id_m->Text+"',type_ens='"+
+Query1->SQL->Text="UPDATE matieres SET id_m='"+ id_mj->Text+"',type_ens='"+
 typ_ens->Text+"',type_m='"+typ_m->Text+"',coef='"+coef->Text+"',nom_m='"+
 ntm->Text+"',init_mat='"+init_m->Text+"' WHERE matieres ='"+k->Text+"'   ";
 Query1->ExecSQL();
@@ -407,5 +410,56 @@ typ_ens ->Text="";
 }
 //---------------------------------------------------------------------------
 
+void __fastcall Tgprincipal::Button27Click(TObject *Sender)
+{
+if (MessageDlgPos("�tes-vous sure de vouloir supprimer ?", mtConfirmation, mbYesNoCancel, 0, 500, 300, mbYes)== IDYES)
+ {
+  Query2->SQL->Text=" DELETE FROM matieres WHERE id_m='"+k->Text+"' ";
+Query1->ExecSQL();
+}
+		TabSheet4->OnShow(this);  // pour actualiser la page
+}
+//---------------------------------------------------------------------------
 
+
+
+void __fastcall Tgprincipal::Supprimer2Click(TObject *Sender)
+{
+      if (MessageDlgPos("�tes-vous sure de vouloir supprimer ?", mtConfirmation, mbYesNoCancel, 0, 500, 300, mbYes)== IDYES)
+ {
+  Query2->SQL->Text=" DELETE FROM matieres WHERE id_m='"+k->Text+"' ";
+Query1->ExecSQL();
+}
+		TabSheet4->OnShow(this);  // pour actualiser la page
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgprincipal::Modifier2Click(TObject *Sender)
+{
+
+	AnsiString id_m1,typ_ens1,typ_m1,coef1,nom_m1,init_mat1;
+	TDate dl_pay1;
+   if (DBGrid4->SelectedRows->Count>0) {
+	 TDataSet * ligne = DBGrid4 ->DataSource->DataSet;
+	 id_m1= ligne ->Fields->FieldByName("id_m")->AsAnsiString;
+	 typ_ens1= ligne ->Fields->FieldByName("type_ens")->AsAnsiString;
+	 typ_m1 = ligne ->Fields->FieldByName("type_m")->AsAnsiString;
+	 coef1= ligne ->Fields->FieldByName("coef")->AsAnsiString;
+	 nom_m1=  ligne ->Fields->FieldByName("nom_m")->AsAnsiString;
+	 init_mat1= ligne ->Fields->FieldByName("init_mat")->AsAnsiString;
+
+	   //id_m,type_ens, type_m, coef, nom_m,init_mat
+ typ_ens ->Text=typ_ens1;
+ typ_m->Text=typ_m1;
+ coef->Text=coef1;
+ ntm->Text=nom_m1;
+ init_m->Text=init_mat1;
+
+
+   }
+	Query1->SQL->Text="SELECT * FROM matieres WHERE id_m='"+id_m1+"'  ";
+   Query1->Open();
+   Query1->Active=true;
+}
+//---------------------------------------------------------------------------
 
