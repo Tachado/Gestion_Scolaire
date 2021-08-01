@@ -30,8 +30,8 @@ void __fastcall Tgprincipal::Button17Click(TObject *Sender)
 	if ( (esgt->Text != "") & (init_class->Text != "") &(cfc->Text != "") & (clas->Text !="") &(sct->Text !="")& (prp->Text !="") & (s_f->Text !="") ) {
 
 
-	Query3->SQL->Text="INSERT INTO classes(enseignement,init_class,chef_class,nom_class,delai,ens_principal,serie_filiere,scolarite) VALUES('"+esgt->Text+"','"+init_class->Text+"','"+cfc->Text+"','"+clas->Text+"','"+dl_pay->Date.FormatString("yyyy-mm-dd")+"','"+prp->Text+"','"+s_f->Text+"','"+sct->Text+"' ) ";
-	Query3->ExecSQL();
+	Query1->SQL->Text="INSERT INTO classes(enseignement,init_class,chef_class,nom_class,delai,ens_principal,serie_filiere,scolarite) VALUES('"+esgt->Text+"','"+init_class->Text+"','"+cfc->Text+"','"+clas->Text+"','"+dl_pay->Date.FormatString("yyyy-mm-dd")+"','"+prp->Text+"','"+s_f->Text+"','"+sct->Text+"' ) ";
+	Query1->ExecSQL();
 
 
 	esgt->Text="";
@@ -66,9 +66,9 @@ void __fastcall Tgprincipal::TabSheet4Show(TObject *Sender)
 {
 //actualisation
 
-Query3->SQL->Text="SELECT * FROM classes Order By id_class ";
-	Query3->Open();
-	Query3->Active=true;
+Query2->SQL->Text="SELECT * FROM classes Order By id_class ";
+	Query2->Open();
+	Query2->Active=true;
 }
 //---------------------------------------------------------------------------
 
@@ -97,7 +97,7 @@ void __fastcall Tgprincipal::Button19Click(TObject *Sender)
 {
 if (MessageDlgPos("�tes-vous sure de vouloir supprimer ?", mtConfirmation, mbYesNoCancel, 0, 500, 300, mbYes)== IDYES)
  {
-  Query2->SQL->Text=" DELETE FROM classes WHERE id_class='"+k->Text+"' ";
+  Query1->SQL->Text=" DELETE FROM classes WHERE id_class='"+k->Text+"' ";
 Query1->ExecSQL();
 }
 		TabSheet4->OnShow(this);  // pour actualiser la page
@@ -109,7 +109,7 @@ void __fastcall Tgprincipal::Supprimer1Click(TObject *Sender)
 		// supprimer dans class
    if (MessageDlgPos("�tes-vous sure de vouloir supprimer ?", mtConfirmation, mbYesNoCancel, 0, 500, 300, mbYes)== IDYES)
  {
-  Query2->SQL->Text=" DELETE FROM classes WHERE id_class='"+k->Text+"' ";
+  Query1->SQL->Text=" DELETE FROM classes WHERE id_class='"+k->Text+"' ";
 Query1->ExecSQL();
 }
 		TabSheet4->OnShow(this);  // pour actualiser la page
@@ -285,8 +285,8 @@ void __fastcall Tgprincipal::Button25Click(TObject *Sender)
 	{
 
 
-Query3->SQL->Text=" INSERT INTO matieres (id_m,type_ens, type_m, coef, nom_m,init_mat) VALUES ('"+id_mj->Text+"','"+typ_ens->Text+"','"+typ_m->Text+"','"+coef->Text+"','"+ntm->Text+"','"+init_m->Text+"')";
-Query3->ExecSQL() ;
+Query1->SQL->Text=" INSERT INTO matieres (id_m,type_ens, type_m, coef, nom_m,init_mat) VALUES ('"+id_mj->Text+"','"+typ_ens->Text+"','"+typ_m->Text+"','"+coef->Text+"','"+ntm->Text+"','"+init_m->Text+"')";
+Query1->ExecSQL() ;
 
 
 id_mj ->Text="";
@@ -308,15 +308,15 @@ id_mj ->Text="";
 void __fastcall Tgprincipal::TabSheet7Show(TObject *Sender)
 {
 //actualisation
-	Query3->SQL->Text="SELECT * FROM matieres Order By id_m ";
-	Query3->Open();
-	Query3->Active=true;
+	Query2->SQL->Text="SELECT * FROM matieres Order By id_m ";
+	Query2->Open();
+	Query2->Active=true;
 
 	if (id_mj->Text == "")
 {
-Query1->SQL->Text="SELECT id_m FROM matieres  WHERE id_m LIKE '__MA%' Order By id_m ";
-Query1->Open();
-bool test= Query1->IsEmpty();
+Query2->SQL->Text="SELECT id_m FROM matieres  WHERE id_m LIKE '__MA%' Order By id_m ";
+Query2->Open();
+bool test= Query2->IsEmpty();
 if(test)
   {
    TDate date =Now();
@@ -324,8 +324,8 @@ if(test)
   }
 else
   {
-   Query1->Last();
-   AnsiString mat= Query1->FieldByName("id_m")->AsString;
+   Query2->Last();
+   AnsiString mat= Query2->FieldByName("id_m")->AsString;
    mat=mat.Trim(); mat = mat.SubString(1,2);
    TDate date=Now();
    AnsiString a,num;
@@ -333,7 +333,7 @@ else
 
    if(mat==a)
 	 {
-		AnsiString code = Query1->FieldByName("id_m")->AsString;
+		AnsiString code = Query2->FieldByName("id_m")->AsString;
 		code=code.Trim();code=code.SubString(code.Pos("A")+1,code.Length());
 		code=code.ToDouble()+1;
 		if(code.ToDouble()<=9)
@@ -420,10 +420,10 @@ void __fastcall Tgprincipal::Button27Click(TObject *Sender)
 {
 if (MessageDlgPos("�tes-vous sure de vouloir supprimer ?", mtConfirmation, mbYesNoCancel, 0, 500, 300, mbYes)== IDYES)
  {
-  Query2->SQL->Text=" DELETE FROM matieres WHERE id_m='"+k->Text+"' ";
+  Query1->SQL->Text=" DELETE FROM matieres WHERE id_m='"+k->Text+"' ";
 Query1->ExecSQL();
 }
-		TabSheet4->OnShow(this);  // pour actualiser la page
+		TabSheet7->OnShow(this);  // pour actualiser la page
 }
 //---------------------------------------------------------------------------
 
@@ -431,12 +431,12 @@ Query1->ExecSQL();
 
 void __fastcall Tgprincipal::Supprimer2Click(TObject *Sender)
 {
-      if (MessageDlgPos("�tes-vous sure de vouloir supprimer ?", mtConfirmation, mbYesNoCancel, 0, 500, 300, mbYes)== IDYES)
+	  if (MessageDlgPos("�tes-vous sure de vouloir supprimer ?", mtConfirmation, mbYesNoCancel, 0, 500, 300, mbYes)== IDYES)
  {
-  Query2->SQL->Text=" DELETE FROM matieres WHERE id_m='"+k->Text+"' ";
+  Query1->SQL->Text=" DELETE FROM matieres WHERE id_m='"+k->Text+"' ";
 Query1->ExecSQL();
 }
-		TabSheet4->OnShow(this);  // pour actualiser la page
+		TabSheet7->OnShow(this);  // pour actualiser la page
 }
 //---------------------------------------------------------------------------
 
@@ -454,7 +454,7 @@ void __fastcall Tgprincipal::Modifier2Click(TObject *Sender)
 	 nom_m1=  ligne ->Fields->FieldByName("nom_m")->AsAnsiString;
 	 init_mat1= ligne ->Fields->FieldByName("init_mat")->AsAnsiString;
 
-	   //id_m,type_ens, type_m, coef, nom_m,init_mat
+
  typ_ens ->Text=typ_ens1;
  typ_m->Text=typ_m1;
  coef->Text=coef1;
@@ -492,7 +492,7 @@ void __fastcall Tgprincipal::Button33Click(TObject *Sender)
 Query1->SQL->Text=" INSERT INTO parents (nom_pa,resid,sexe_pa) VALUES ('"+ntp_pa->Text+"','"+resid->Text+"','"+sexe_pa->Text+"')";
 Query1->ExecSQL() ;
 		Query1->SQL->Text=" INSERT INTO contact_pa (cont_pa) VALUES ('"+tel_pa->Text+"')";
-Query1->ExecSQL() ;
+		Query1->ExecSQL() ;
 
 ntp_pa  ->Text="";
  resid  ->Text="";
@@ -512,7 +512,7 @@ void __fastcall Tgprincipal::Button36Click(TObject *Sender)
 {
 if (MessageDlgPos("�tes-vous sure de vouloir supprimer ?", mtConfirmation, mbYesNoCancel, 0, 500, 300, mbYes)== IDYES)
  {
-  Query2->SQL->Text=" DELETE FROM parents WHERE id_pa='"+k->Text+"' ";
+  Query1->SQL->Text=" DELETE FROM parents WHERE id_pa='"+k->Text+"' ";
 Query1->ExecSQL();
 }
 		TabSheet11->OnShow(this);  // pour actualiser la page
@@ -533,7 +533,7 @@ void __fastcall Tgprincipal::Supprimer3Click(TObject *Sender)
 {
 if (MessageDlgPos("�tes-vous sure de vouloir supprimer ?", mtConfirmation, mbYesNoCancel, 0, 500, 300, mbYes)== IDYES)
  {
-  Query2->SQL->Text=" DELETE FROM parents WHERE id_pa='"+k->Text+"' ";
+  Query1->SQL->Text=" DELETE FROM parents WHERE id_pa='"+k->Text+"' ";
 Query1->ExecSQL();
 }
 		TabSheet11->OnShow(this);  // pour actualiser la page
@@ -586,5 +586,6 @@ void __fastcall Tgprincipal::Modifier3Click(TObject *Sender)
    Query1->Active=true;
 }
 //---------------------------------------------------------------------------
+
 
 
