@@ -589,3 +589,13 @@ void __fastcall Tgprincipal::Modifier3Click(TObject *Sender)
 
 
 
+void __fastcall Tgprincipal::Button29Click(TObject *Sender)
+{
+typ_ens ->Text="";
+ typ_m->Text="";
+ coef->Text="";
+ ntm->Text="";
+ init_m->Text="";
+}
+//---------------------------------------------------------------------------
+

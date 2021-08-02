@@ -471,6 +471,7 @@ __published:	// Composants g�r�s par l'EDI
 	void __fastcall Supprimer3Click(TObject *Sender);
 	void __fastcall Button37Click(TObject *Sender);
 	void __fastcall Modifier3Click(TObject *Sender);
+	void __fastcall Button29Click(TObject *Sender);
 
 private:	// D�clarations utilisateur
 public:		// D�clarations utilisateur
