@@ -154,7 +154,7 @@ void __fastcall Tgprincipal::Modifier1Click(TObject *Sender)
 
 void __fastcall Tgprincipal::Button21Click(TObject *Sender)
 {
-// anuler une action dans class
+// anuler une action dans classes
 	esgt->Text="";
 	init_class->Text="";
 	cfc->Text="";
